@@ -1,0 +1,25 @@
+{
+  "feedback_id": "FB-2026-042",
+  "title": "Drift detection for SFTP connectors should be on by default",
+  "source": ["ISS-atlas-20260629-01", "ISS-beta-20260418-02", "FDE retro 2026-06"],
+  "generality": "platform-capability",
+  "pattern": "recurring (3 clients in 6 months)",
+  "current_state": "SFTP connectors fail silently when client schema changes; drift detection exists but is opt-in.",
+  "desired_outcome": "Drift detection on by default for all SFTP connectors, with a configurable alert threshold.",
+  "evidence": [
+    "Client A: unannounced column addition caused 3-day sync failure (de-identified)",
+    "Client B: column rename caused silent data loss for one batch (de-identified)",
+    "Client C: drift caught only because FDE was on-call (de-identified)"
+  ],
+  "proposed_scope": "config default + alert",
+  "impact": {
+    "affected_clients": "4+",
+    "deal_impact": "differentiator",
+    "fde_hours_per_deployment": "3-5h troubleshooting drift",
+    "asset_leverage": "productizable"
+  },
+  "priority_recommendation": "p1-high",
+  "related_feedback": [],
+  "attachments": ["ISS-atlas-20260629-01"],
+  "asset_proposal": "AM-connector-sftp-watcher-v1.2.0"
+}

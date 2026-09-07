@@ -1,0 +1,22 @@
+{
+  "feedback_id": "FB-<YYYY>-<NNN>",
+  "title": "one-line, outcome-oriented",
+  "source": ["ISS-..."],
+  "generality": "single-client | reusable-pattern | platform-capability",
+  "pattern": "one-off | recurring (N clients) | universal (every deployment)",
+  "current_state": "the gap in product terms",
+  "desired_outcome": "outcome, NOT implementation",
+  "evidence": [
+    "Client A: ... (de-identified)"
+  ],
+  "proposed_scope": "feature | API | config-surface | docs | reusable-asset",
+  "impact": {
+    "affected_clients": "1 | 2-3 | 4+ | every-deployment",
+    "deal_impact": "blocking | required-for-rfp | differentiator | qol",
+    "fde_hours_per_deployment": "",
+    "asset_leverage": "none | parameterizable | productizable"
+  },
+  "priority_recommendation": "p0-critical | p1-high | p2-medium | p3-nice-to-have",
+  "related_feedback": [],
+  "attachments": []
+}

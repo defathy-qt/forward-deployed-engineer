@@ -1,0 +1,8 @@
+case_id,stratum,input_summary,expected_result,expected_sources,expected_action,safe_to_auto,expert_reviewed,notes
+GS-001,normal,,,,,no,yes,
+GS-002,normal,,,,,no,yes,
+GS-003,anomaly,,,,,no,yes,
+GS-004,anomaly,,,,,no,yes,
+GS-005,boundary,,,,,no,yes,
+GS-006,missing,,,,,ask_human,yes,
+GS-007,adversarial,,,,,refuse,yes,

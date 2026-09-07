@@ -1,0 +1,29 @@
+{
+  "feedback_id": "FB-2026-058",
+  "title": "Config-snapshot pinning for batch connectors should be on by default",
+  "source": [
+    "ISS-iris-20260828-01",
+    "ISS-atlas-20260629-01 (SFTP column drift, reused under sandwich-pin)",
+    "FDE retro 2026-08"
+  ],
+  "generality": "platform-capability",
+  "pattern": "recurring (2 engagements: 2026-06, 2026-08; both file-schema or config drift)",
+  "current_state": "connector-sftp-watcher v1.2.0 只钉 schema（列数/类型）；业务配置表（如科目映射）的变更授权签名不在批内，任何未授权修改会静默流入归因链。",
+  "desired_outcome": "对账/投递类连接器默认开启 'sandwich 快照校验'：批首/批尾携带配置快照 hash，与审计域授权事件比对，不一致即阻断并预警；阈值可配。",
+  "evidence": [
+    "Iris Bank: 23 笔差异归因被未授权映射漂移带偏，RO 复核叫停（pilot，de-identified）",
+    "wms 客户: SFTP 列数漂移导致 3 天同步中断（2026-06，de-identified）",
+    "同型教训 3 次 → 共享连接器升级路径即最优解"
+  ],
+  "proposed_scope": "connector-config-default + drift-alert-threshold",
+  "impact": {
+    "affected_clients": "5+",
+    "deal_impact": "differentiator",
+    "fde_hours_per_deployment": "8-12h troubleshooting config drift",
+    "asset_leverage": "productizable: inherit connector asset, add config-plane"
+  },
+  "priority_recommendation": "p1-high",
+  "related_feedback": ["FB-2026-042 (drift detection default on)"],
+  "attachments": ["ISS-iris-20260828-01"],
+  "asset_proposal": "AM-connector-sftp-watcher-v1.3.0"
+}

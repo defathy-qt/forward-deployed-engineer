@@ -1,0 +1,26 @@
+# 由 Atlas 交付沉淀的版本化资产（全脱敏，样本合成）
+asset_id: skill-gl-diff-attribution
+name: GL drift attribution with config-snapshot authorization (对账差异归因 + 调账建议预审)
+type: agent-skill
+version: 1.0.0
+inputs: [recon_batch, subject_mapping_snapshot, auth_events, golden_set]
+outputs: [attribution, adjustment_draft, drift_alert, audit_events]
+applies_when: "机构按固定周期经文件交换/ESB 投递对账文件（银行/集团财务对账常见），且合规要求人工授权门"
+does_not_apply:
+  - "流式/实时对账（需事件基座）"
+  - "可自动过账的环境"
+  - "监管报送自动填单"
+config_surface: [system_set, mapping_ttl, drift_threshold, need_auth_gate, fence_level]
+tests:
+  golden_set: golden-set-iris-v2.csv
+  fault_injection: [mapping_drift, missing_file, dedup, unauthorized_change]
+  result_floor: 0.85
+  evidence_floor: 0.95
+  unsafe_action_floor: 0
+provenance:
+  born_in_client: "de-identified engagement #6 (Iris Bank)"
+  reused_by: []
+  inherits: ["AM-connector-sftp-watcher-v1.2.0 (from engagement #3, adopted 1→N)"]
+owner: fde-platform-team
+changelog: CHANGELOG.md
+# 注：不含任何真实库表/凭证/数据；科目映射为合成快照；会计准则是公开的、账本是私有的。

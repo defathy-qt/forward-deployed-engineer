@@ -1,0 +1,21 @@
+{
+  "issue_id": "ISS-atlas-20260629-01",
+  "status": "mitigated",
+  "environment": {
+    "tier": "staging",
+    "version": "4.8.1",
+    "model_prompt_version": "triage-prompt v11"
+  },
+  "symptom": "Nightly inventory batch failed to load; triage answers lost stock context.",
+  "expected": "Batch loads against pinned schema v2; answers include stock snapshot.",
+  "repro_steps": "Replay 2026-06-29 SFTP file through sftp-validate; column count 19 != pinned 18.",
+  "repro_rate": "every-time",
+  "ai_failure_layer": "content",
+  "root_cause": "SFTP parser failed because the client's WMS added a lot_expiry_date column on 2026-06-26 without notice, shifting the schema.",
+  "classification": "client-upstream",
+  "fix": "Added drift detection (PR #4821); schema pinned to v2; coordinated v3 migration scheduled 2026-07-15.",
+  "golden_set_added": "GS-041",
+  "client_verify": "Run `sftp-validate --file <latest>`; prints 'schema v2 OK' or lists drift.",
+  "product_feedback": true,
+  "lessons": "Runbook 2.3: on column-count change alert before retrying; drift detection should default on."
+}

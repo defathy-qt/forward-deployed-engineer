@@ -1,0 +1,22 @@
+{
+  "issue_id": "ISS-<client-slug>-<YYYYMMDD>-<NN>",
+  "status": "resolved | mitigated | escalated | wont-fix",
+  "environment": {
+    "tier": "prod | staging | dev",
+    "region": "",
+    "version": "",
+    "model_prompt_version": ""
+  },
+  "symptom": "",
+  "expected": "",
+  "repro_steps": "",
+  "repro_rate": "every-time | intermittent | one-off",
+  "ai_failure_layer": "content | media | isolation | knowledge-version | runtime | process | n/a",
+  "root_cause": "one testable sentence: <component> <failed action> because <reason>",
+  "classification": "platform | config | client-upstream | integration | process",
+  "fix": "",
+  "golden_set_added": "GS-NNN or none",
+  "client_verify": "a command or specific output the client runs",
+  "product_feedback": false,
+  "lessons": ""
+}

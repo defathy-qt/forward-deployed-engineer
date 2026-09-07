@@ -1,0 +1,24 @@
+# 由 Atlas 交付沉淀的版本化资产（全脱敏，样本合成）
+asset_id: connector-sftp-watcher
+name: SFTP CSV watcher with schema-pin and drift alert
+type: connector
+version: 1.2.0
+inputs: [sftp_endpoint, credentials_ref, schema_contract, schedule]
+outputs: [validated_batch, drift_alert]
+applies_when: "客户按固定计划经 SFTP 投递 CSV（物流/制造/零售仓储常见）"
+does_not_apply:
+  - "流式/Kafka 接入"
+  - "二进制格式（Excel 加密包等）"
+  - "客户主动 push 的 API 集成"
+config_surface: [host, port, path, key_ref, schema_version, alert_channel]
+tests:
+  golden_set: golden/
+  fault_injection: [missing_file, column_drift, malformed_row, duplicate_batch]
+  result_floor: 1.0
+  unsafe_action_floor: 0
+provenance:
+  born_in_client: "de-identified engagement #3"
+  reused_by: ["engagement #5", "engagement #7"]
+owner: fde-platform-team
+changelog: CHANGELOG.md
+# 注：不含任何真实端点/凭证/数据；测试文件由 schema 契约合成生成。

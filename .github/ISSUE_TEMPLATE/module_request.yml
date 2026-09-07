@@ -1,0 +1,35 @@
+name: Module / template request / 模块需求
+description: Suggest a new reference module, template, example, or industry profile
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Field problem it solves
+      description: What recurring FDE situation is not covered today? De-identified.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Asset kind
+      options:
+        - reference module (EN+ZH)
+        - template
+        - end-to-end example
+        - industry profile
+        - check/script
+    validations:
+      required: true
+  - type: textarea
+    id: outline
+    attributes:
+      label: Proposed outline
+      description: Steps, artifacts, correct/common patterns you expect.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Reuse evidence
+      description: How many engagements needed this? Why is it reusable, not one-off?
+      validations:
+        required: true

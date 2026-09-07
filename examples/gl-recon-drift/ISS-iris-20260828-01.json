@@ -1,0 +1,21 @@
+{
+  "issue_id": "ISS-iris-20260828-01",
+  "status": "mitigated",
+  "environment": {
+    "tier": "pilot",
+    "version": "iris-v0.9",
+    "model_prompt_version": "attribution-prompt-v4 row-pin"
+  },
+  "symptom": "2026-08-28 月结险情窗口，8 月对账批次中 23 笔差异被归因到错误的归属系统；RO 复核叫停，未产生任何建议草稿被采纳。",
+  "expected": "归因结果与 subject_mapping 当日快照一致；映射发生变更时应产生漂移预警而非静默使用新映射。",
+  "repro_steps": "回放 08-28 对账批次；科目管理员 08-26 未经授权门修改过 subject_mapping（把 3 个'贷款结算'科目拷到'存款结算'名下），修改记录仅存于本地表格未同步快照。",
+  "repro_rate": "deterministic-with-drift（当且仅当映射被未授权修改时 100%）",
+  "ai_failure_layer": "content",
+  "root_cause": "连接器只钉了文件 schema（列数/类型），未钉'随批配置快照'——mapping 的授权变更签名没有进入对账批次，归因链读取到的是未授权新映射。",
+  "classification": "client-upstream + integration（配置面），呼应 wms 的 'connector-sftp-watcher' SFTP 列数漂移教训平移",
+  "fix": "connector 升级为 'sandwich 校验'：对账批在文件头/尾携带 subject_mapping 快照 hash；hash 与审计域授权事件不一致 → 阻断归因并触发漂移预警；23 笔差异以授权时间点前快照重算，全部落回正确归属。",
+  "golden_set_added": "GS-039-mapping-unapproved-change（revised from GS-017）",
+  "client_verify": "对账批次健康页应显示 'mapping-snapshot: auth-ok'，否则批次被阻断无法归因。",
+  "product_feedback": true,
+  "lessons": "Runbook 2.4：配置快照必须随批授信，schema 漂移与配置漂移要分两路检测；『单能力复用』要有『配置面推导』升级路径。"
+}

@@ -1,0 +1,21 @@
+# 资产清单 / Asset Manifest —— 配套 references/09-retro-assets，ID：AM-
+asset_id: <kebab-case-id>
+name: <human readable name>
+type: connector | agent-skill | template | component | rule-pack | reference-architecture | playbook
+version: 0.1.0            # major=破坏性配置 minor=新能力 patch=修复
+inputs: []
+outputs: []
+applies_when: "<适用场景>"
+does_not_apply:           # 与能力同样重要
+  - "<不适用场景>"
+config_surface: []        # 客户特有取值全部外置
+tests:
+  golden_set: <path>
+  fault_injection: []
+  result_floor: null      # 数值下限，如 0.85
+  unsafe_action_floor: 0
+provenance:               # 全部去标识
+  born_in_client: "de-identified engagement #N"
+  reused_by: []
+owner: <team-or-person>
+changelog: CHANGELOG.md

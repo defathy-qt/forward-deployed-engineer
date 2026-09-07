@@ -1,0 +1,42 @@
+name: Bug report / 缺陷
+description: A module/template/script gives wrong or unusable guidance
+labels: ["bug"]
+body:
+  - type: input
+    id: module
+    attributes:
+      label: Module / file
+      description: Which reference, template, example, or script is affected?
+      placeholder: references/04-evaluation.zh.md
+    validations:
+      required: true
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Lifecycle stage
+      options:
+        - 1 Discovery
+        - 2 Scoping
+        - 3/4 Integration Architecture
+        - 5 Evaluation
+        - 6 Pilot/Adoption
+        - 7 Deployment/Runbook
+        - Client Debug / Feedback / Retro
+        - Air-gap
+        - Tooling/scripts
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+      description: What should it say/do, and what does it do now?
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: De-identified context
+      description: No client names or real data.
+    validations:
+      required: true

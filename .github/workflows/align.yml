@@ -1,0 +1,28 @@
+name: bilingual-align
+
+on:
+  push:
+    paths:
+      - "references/**"
+      - "SKILL.md"
+      - "templates/**"
+      - "scripts/**"
+  pull_request:
+    paths:
+      - "references/**"
+      - "SKILL.md"
+      - "templates/**"
+      - "scripts/**"
+
+jobs:
+  align:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Structural alignment (warnings allowed)
+        run: python scripts/check-align.py references
+      - name: Strict alignment (warnings fail the job)
+        run: python scripts/check-align.py references --strict
