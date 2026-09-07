@@ -12,8 +12,8 @@ Unified two earlier FDE delivery sets into one bilingual agent skill.
 - **Source FDE-02** — reference playbooks (unified module skeleton, discovery/scoping
   split, ontology layer, four-exit gates, adoption metrics).
 
-Both sets remain untouched under `D:\AI\FDE\` as source material.
-两原件保留于 `D:\AI\FDE\` 作素材。
+Both source sets remain outside this repository as source material.
+两原件未纳入本仓库，另行留存作素材。
 
 ### What changed / 变化
 
